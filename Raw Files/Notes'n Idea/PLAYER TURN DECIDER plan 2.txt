@@ -1,0 +1,167 @@
+PLAYER TURN DECIDER
+
+
+ruko mai batata hu ki mai kya chahata hu  using UnityEngine;
+using System;
+using System.Collections.Generic;
+
+public class PlayerData     
+{
+    public int playerIndex;
+    public int diceResult;
+
+    public PlayerData(int index, int result)
+    {
+        playerIndex = index;
+        diceResult = result;
+    }
+}
+
+public class PlayerTurnDecider : MonoBehaviour
+{
+    public GameObject dicePrefab;
+    public Transform diceContainer;
+    private List<PlayerData> playerDataList;
+    private List<GameObject> diceObjects;
+
+    private int[] diceResults;
+
+    private void Start()       mera ye method create dice ko call karta hai  aur ek array aur player data kist banata hai
+    {
+        int numberOfPlayers = PlayerPrefs.GetInt("NumberOfPlayers");
+        diceResults = new int[numberOfPlayers];
+        playerDataList = new List<PlayerData>();
+
+        CreateDice();  ye method dice ke prefab ki copy banata hai
+    }
+
+    private void CreateDice()
+    {
+        int numberOfPlayers = PlayerPrefs.GetInt("NumberOfPlayers");
+
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            GameObject diceObject = Instantiate(dicePrefab, diceContainer);
+
+            PlayerDiceRoller diceRoller = diceObject.GetComponent<PlayerDiceRoller>();
+            diceRoller.Initialize(this);
+
+            Vector3 position = GetDicePosition(i);
+            diceObject.GetComponent<RectTransform>().anchoredPosition = position;
+        }
+    }
+
+    private Vector3 GetDicePosition(int playerIndex)   ye method un prefab copies ko nirdharit jaghe pe lagata hai
+    {
+        int numberOfPlayers = PlayerPrefs.GetInt("NumberOfPlayers");
+
+        if (numberOfPlayers == 2)
+        {
+            if (playerIndex == 0)
+            {
+                return new Vector3(270f, 215f, 0f);
+            }
+            else if (playerIndex == 1)
+            {
+                return new Vector3(270f, 105f, 0f);
+            }
+        }
+        else if (numberOfPlayers == 3)
+        {
+            if (playerIndex == 0)
+            {
+                return new Vector3(270f, 215f, 0f);
+            }
+            else if (playerIndex == 1)
+            {
+                return new Vector3(270f, 105f, 0f);
+            }
+            else if (playerIndex == 2)
+            {
+                return new Vector3(270f, -5f, 0f);
+            }
+        }
+        else if (numberOfPlayers == 4)
+        {
+            if (playerIndex == 0)
+            {
+                return new Vector3(270f, 215f, 0f);
+            }
+            else if (playerIndex == 1)
+            {
+                return new Vector3(270f, 105f, 0f);
+            }
+            else if (playerIndex == 2)
+            {
+                return new Vector3(270f, -5f, 0f);
+            }
+            else if (playerIndex == 3)
+            {
+                return new Vector3(270f, -115f, 0f);
+            }
+        }
+
+        return Vector3.zero;
+    }
+
+
+
+    public int GetDiceResult(int playerIndex, int diceResult) ye method  mere dusre method se data leta hai
+    {
+        Debug.Log("Player " + playerIndex);
+        Debug.Log("Dice Result: " + diceResult);
+        CheckArrayCondition();                  yaha mai chahata hu ki mcheck Array condition method array ke full hone ke baad he call ho
+        return diceResults[playerIndex];
+    }
+
+    private void CheckArrayCondition()  ye method array ko check karta hai 
+    {
+        Debug.Log("Checking array condition...");
+
+        if (diceResults[0] != diceResults[1] && diceResults[1] != diceResults[2] && diceResults[2] != diceResults[3] && diceResults[3] != diceResults[0])     mujhe apni condition galat si lag rahi hai , lekin mai aapko bata du ki yaha mai chahata hu ki array ka koi bhi dice result same na ho 
+        {       
+            for (int i = 0; i < diceResults.Length; i++)   yaha sabhi dice result ko aur player inder ko assign dice result method ko bheja jata hai
+            {
+                AssignDiceResult(i, diceResults[i]);
+            }
+        }
+        else condition sahi na hone par update game call hoga 
+            {
+                UpdateGame();
+            }
+        }
+    }
+
+    public void AssignDiceResult(int playerIndex, int diceResult) yaha player index aur dice result ko sath me player data ke andar rakh ke add kiya jaata hai
+    {
+        PlayerData playerData = new PlayerData(playerIndex, diceResult);
+        playerDataList.Add(playerData);
+        Debug.Log("Player " + playerData.playerIndex + " dice result: " + playerData.diceResult);
+    }
+sort dice result method me sare dice results sort ho jayenge , is method ka logic check kar le ki ye saare dice results ko decending order me lagayega ki nahi 
+    public void SortDiceResults()
+    {
+        playerDataList.Sort((a, b) => b.diceResult.CompareTo(a.diceResult));
+
+        Debug.Log("Sorted dice results:");
+        foreach (PlayerData playerData in playerDataList)
+        {
+            Debug.Log("Player " + playerData.playerIndex + " dice result: " + playerData.diceResult);
+        }
+    }
+ab akhir me humara update hai jo ki condition galat hone par check array condition method me call hua tha , isme ma chahta hu  ki sabhi prefabs jo dice conyainer ke andar hai vo delete ya destroy ko jaye fir array aur player data  dono clear ho jaye aur ab last me start method call ho
+    private void UpdateGame()
+    {
+        Debug.Log("Updating game...");
+
+        foreach (Transform child in diceContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        playerDataList.Clear();
+        Array.Clear(diceResults, 0, diceResults.Length);
+
+        Start();
+    }
+}
+mere iss code ka pura motive ye hai ki mai apne create kare hue  prefabs ke clone se alag alag dice result le saku aur uske basis pe ek player data ki list ban ke taiyar ho , jo ki mere game ki turn set karegi ek alag script me , ab ap meri jarurat ke hisab ye code me modification kare 

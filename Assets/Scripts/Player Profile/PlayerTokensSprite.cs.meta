@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad28b37b5fe1cc44f93f99ab17bc667a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player1Sprite: {fileID: -974605101, guid: cb750f085e46eb449b3e137bc75ac9ca, type: 3}
+  - player2Sprite: {fileID: -48084611, guid: cb750f085e46eb449b3e137bc75ac9ca, type: 3}
+  - player3Sprite: {fileID: -757259832, guid: cb750f085e46eb449b3e137bc75ac9ca, type: 3}
+  - player4Sprite: {fileID: -249173506, guid: cb750f085e46eb449b3e137bc75ac9ca, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

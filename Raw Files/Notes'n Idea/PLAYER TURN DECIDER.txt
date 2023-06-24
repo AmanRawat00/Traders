@@ -1,0 +1,22 @@
+PLAYER TURN DECIDER
+
+
+ab mujhe ye bataiye ki kya mai code se place holder ya rank jaisa kch bana sakta hu ??? jo ki  sorting ke andar call kiya jaye aur vo sabhi custom data me save dice result  ko check kare , aur unrepeated no. ko ek save kar le aur repeated no. wale dice result ke player index ko use kare aur un repeat  wale  dices ko fir se roll karaye aur ek new number de  aur ye process repeat ho jab tak sab unique no. na mill jaye  ,           example ke taur pe man lijiye  dice result aata hai 5 ,11 ,3, 5  . fir sab no. assign honge aur save honge  is tarha 0-5 , 1-11,  2-3, 3-5  . fir imli sorting hogi  1-11 , 0-5 , 3-5, 2-3     ye sab hone ke baad ye  check honge  aur  1-11 firstrank pe save   2-3 last me save aur ab 0-5 , 3-5  vapis se dice roll karvayenge aur jab ye apne dice result layenge ye sabhi meathod se hoke ayenge aur bachi hue place me fit ho jayenge , isse farak nahi padta dubara roll kara ke laana kaisa no. laye jo place saved ho chuki hai usme vohi data rahenge  ab akhir me jab humme  ek unique dice result ke sath lage apne player index mil jayenge to vo humari ek new script ke pass jayenge aur vo script is data ke player index se player ki game me turn nirdharit kardegi jo ki pure game me chalegi , ab aap mujhe iske modules, idea aur explaination de ki ye kaise hoga aur ye kaisa hai
+
+
+
+Aapka idea interesting hai! Ye concept aapke dice results ko rank aur uniqueness ke basis par organize karne ke liye ek module banane ka hai. Mai aapko is approach ko step-by-step samjhata hu.
+
+Dice Results ko Store karna: Har player ke dice result aur unke corresponding player index ko store karne ke liye ek custom data structure (jaise PlayerData) ka upyog kare. Ismein player index aur dice result ka pair hoga.
+
+Dice Results ko Sort karna: PlayerData list ko dice result ke basis par sort kare, jahan dice result bada hoga, vahan uska rank bada hoga. Iske liye SortDiceResults method ka upyog kare. Sorting ke baad, PlayerData list players ke ranks ke saath sorted hoga.
+
+Repeated Dice Results ko Handle karna: Check kare ki kya PlayerData list mein repeated dice results maujood hai. Agar hai, to unko handle karna hoga.
+
+Unique Dice Results ko Identify karna: Ek set (jaise HashSet) ka upyog kare, jisme unique dice results store kiye jayenge. Repeated dice results ko identify karne ke liye PlayerData list ko traverse kare aur dice results ko set mein add kare. Agar set mein add karne ki koshish result false deta hai, to ye duplicate dice result hai.
+
+Duplicate Dice Results ko Handle karna: Duplicate dice results ke liye ek loop chalaye aur unko handle kare. Repeated dice result wale PlayerData objects ko identify kare aur unko ek naye number ke liye roll kare.
+
+New Dice Results ko Assign karna: Unique dice results ke sath unke corresponding player index ko ek naye module ke pass bheje, jisse game me turn nirdharit kar sake. Is module ka implementation aapke game ki logic aur requirements ke anusaar hoga. Ye module current player index aur dice result ke basis par next player index ko decide karega.
+
+Is approach se aapke dice results rank-wise sort ho jayenge aur repeated dice results handle honge. Duplicate dice results ke liye naye numbers generate karke unique dice results hasil kiye jayenge. Fir, unique dice results ke saath corresponding player index ko ek module ke pass bheja jayega, jisse game me turn nirdharit kar sakte hai.

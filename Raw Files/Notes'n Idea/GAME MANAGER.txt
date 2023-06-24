@@ -1,0 +1,38 @@
+GAME MANAGER 
+
+In your game, the flow can be managed by the main game controller or a central game manager script. This script will handle the sequence of actions and transitions between different stages of the game. Here's a general outline of the flow you can consider:
+
+Game Setup:
+
+Initialize necessary variables and game objects.
+Set up the game board, player tokens, and any other components.
+Player Setup:
+
+Prompt the players to enter their names and choose their tokens.
+Save the player names and token choices.
+Turn-Based Gameplay:
+
+Determine the order of play (e.g., by rolling dice or any other method).
+Set the initial player turn.
+Player Turns:
+
+Perform actions for the current player's turn:
+Roll the dice or execute any other action to determine movement.
+Move the player's token on the game board.
+Handle any events or interactions based on the player's position.
+Update game state, scores, or any relevant variables.
+Check Game Conditions:
+
+Check if any victory or end-game conditions have been met (e.g., a player reaches a certain goal or score).
+If a game-ending condition is met, proceed to the game over state.
+Otherwise, continue to the next player's turn.
+Game Over:
+
+Display the game over screen or message.
+Show the winner(s) and any relevant game statistics.
+Allow players to restart the game or return to the main menu.
+To implement this flow, you would need to create appropriate scripts and functions to handle each stage and transition between them. You can use events, callbacks, or state machines to manage the flow and communicate between different game components.
+
+
+
+

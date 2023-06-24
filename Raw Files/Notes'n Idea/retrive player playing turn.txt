@@ -1,0 +1,14 @@
+Code to Acces player turn decider player index order for use
+
+
+
+public PlayerTurnDecider playerTurnDecider;
+
+private void SomeMethod()
+{
+    List<PlayerData> playerList = playerTurnDecider.playerDataList;
+    // You can now access the player index list and work with it
+}
+      
+
+

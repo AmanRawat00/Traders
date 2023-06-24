@@ -1,0 +1,8 @@
+player movement technique
+
+
+User
+mere jo player ke token hai vo pehele game board ki starting me lag jaate hai , jo ki position hai 0,0,0. ye jo mere players ke token hai ye bante hai player spawner ki script se jo ki player prefab ko copy karke tokens banata hai aur jo vo copy banti hai vo player token container me banti hai , ab mai ye chahata hu ki jab mera player profile manager players ki profile create kare to vo player containers me jo token hai unki position ko apne me save kare jaise mere player container me do token hai red aur blue to jab player profile manager first player profile profile banaye to vo player token container ke peheele child ko usme assign kara de taaki jaise meree iss example me profile 1 me red assign ho jayega ab isse hoga ye ki jab mujhe apne game manager me token movement karani hogi to mai player profile 1 ko bol dunga ki apni position do aur fir uss position ko waypoints ke through change karunga jisse ki player ka token board me move karega , ab mere diye gaye upper ke  teeno code ko check karo jo maine aapko diye hai codes  aur batao ye functunality kaise achive hogi
+
+
+With these modifications, the PlayerTokensSpawner script will spawn the player tokens and pass them to the PlayerProfileManager script. The PlayerProfileManager will then assign the player tokens to the respective player profiles and keep track of their positions.
